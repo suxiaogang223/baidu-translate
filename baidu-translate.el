@@ -1,12 +1,40 @@
-;;baidu-translate.el
-;;2019/7/31 by LiShiZhensPi
+;;; baidu-translate.el --- An emacs plugin using baidu-translate-api  -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2019  
+
+;; Author:  <LiShizhen gsu4017@gmail.com>
+;; Keywords: 
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; 本插件需要 unicode-unescape插件的支持 
+
+;;; Code:
+
+
+
+(provide 'baidu-translate)
+(require 'unicode-escape)
 
 (defvar TRANS_API_HOST "http://api.fanyi.baidu.com/api/trans/vip/translate")
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
-(defvar APPID "your APPID")
+(defvar APPID "20190721000319870")
 ;;设置你的秘钥
-(defvar SECURITY_KEY "your SECURITY")
+(defvar SECURITY_KEY "2tLWskfOWIyxSevGkU4L")
 
 
 (defun clear-buffer (buffer-or-name)
@@ -70,7 +98,16 @@ Result: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u59
     (beginning-of-buffer)))
 
 ;;对内核函数的包装UI，你可以根据需要修改语言类型参数，定制自己的UI，下面2个例子是将region或者buffer中的文字翻译为中文
-;; 百度翻译语言列表
+(defun baidu-translate-zh-mark (start end)
+  "Translate the marked text to Chinese."
+  (interactive "r")
+  (baidu-translate-string (buffer-substring start end) "auto" "zh"))
+
+(defun baidu-translate-zh-whole-buffer ()
+  "Translate the whole buffer to Chinese."
+  (interactive)
+  (baidu-translate-string (buffer-string) "auto" "zh"))
+
 ;; auto	自动检测
 ;; zh	中文
 ;; en	英语
@@ -100,14 +137,6 @@ Result: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u59
 ;; hu	匈牙利语
 ;; cht	繁体中文
 ;; vie	越南语
-(defun baidu-translate-zh-mark (start end)
-  "Translate the marked text to Chinese."
-  (interactive "r")
-  (baidu-translate-string (buffer-substring start end) "auto" "zh"))
 
-(defun baidu-translate-zh-whole-buffer ()
-  "Translate the whole buffer to Chinese."
-  (interactive)
-  (baidu-translate-string (buffer-string) "auto" "zh"))
+;;; baidu-translate.el ends here
 
-;;end
