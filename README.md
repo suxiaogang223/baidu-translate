@@ -10,18 +10,18 @@ An emacs plugin using baidu-translate-api
 将baidu-translate.el 下载到.emacs.d文件夹下<br>
 在.emacs 中添加<br>
 ```elisp
-(load "~/.emacs.d/baidu-translate")
+(require 'baidu-translate)
 ;;设置快捷键
 (global-set-key (kbd "C-c m") 'baidu-translate-zh-mark)
 (global-set-key (kbd "C-c M") 'baidu-translate-zh-whole-buffer)
 ```
-申请百度翻译API，在baidu-translate.el中 defvar 处填写APPID和秘钥。<br>
+申请百度翻译API，在.emacs中填写APPID和秘钥。<br>
 ```elisp
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
-(defvar APPID "your APPID")
+(setq APPID "your APPID")
 ;;设置你的秘钥
-(defvar SECURITY_KEY "your SECURITY")
+(setq SECURITY_KEY "your SECURITY")
 ```
 
 ## 翻译为其他语言
