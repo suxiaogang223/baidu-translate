@@ -32,9 +32,9 @@
 (defvar TRANS_API_HOST "http://api.fanyi.baidu.com/api/trans/vip/translate")
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
-(defcustom APPID "")
+(defcustom APPID "your appid")
 ;;设置你的秘钥
-(defcustom SECURITY_KEY "")
+(defcustom SECURITY_KEY "your security_key")
 
 
 (defun clear-buffer (buffer-or-name)
