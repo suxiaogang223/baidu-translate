@@ -35,7 +35,7 @@ An emacs plugin using baidu-translate-api
 
 (defun baidu-translate-zh-whole-buffer ()
   "Translate the whole buffer to Chinese."
-  (interactive)\n
+  (interactive)
   (baidu-translate-string (buffer-string) "auto" "zh"))
 ```
 ## 效果图
