@@ -29,44 +29,44 @@
 (provide 'baidu-translate)
 (require 'unicode-escape)
 
-(defvar TRANS_API_HOST "http://api.fanyi.baidu.com/api/trans/vip/translate")
+(defconst baidu-translate-api-host "http://api.fanyi.baidu.com/api/trans/vip/translate")
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
-(defvar APPID)
+(defvar baidu-translate-appid)
 ;;设置你的秘钥
-(defvar SECURITY_KEY)
+(defvar baidu-translate-security)
 
 
 (defun clear-buffer (buffer-or-name)
-  "Clear a buffer.
-Argument BUFFER-OR-NAME"
-  (if (bufferp buffer-or-name)
-      (setq buffer buffer-or-name)
-    (setq buffer (get-buffer buffer-or-name)))
-  (if (not (buffer-live-p buffer))
-      (error "Buffer don't exist"))
-  (save-excursion
-	;;清空buffer
-	(set-buffer buffer)
-	(mark-whole-buffer)
-	(delete-region (point) (mark))))
-  
+  "Clear the buffer (BUFFER-OR-NAME)"
+  (let ((buffer nil))
+    (if (bufferp buffer-or-name)
+	(setq buffer buffer-or-name)
+      (setq buffer (get-buffer buffer-or-name)))
+    (if (not (buffer-live-p buffer))
+	(error "Buffer don't exist"))
+    (with-current-buffer buffer
+      ;;清空buffer
+      (goto-char (point-min))
+      (mark-end-of-buffer)
+      (delete-region (point) (mark)))))
+
   
 (defun baidu-translate-core (query src-language dis-language)
   "Translate QUERY from SRC-LANGUAGE to DIS-LANGUAGE,return as string.
 \nExample: (baidu-translate-core '你好' 'auto' 'en')
 \nResult: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u597d\",\"dst\":\"Hello\"}]}"
   (let* ((salt (number-to-string (random)))
-	 (URL (concat TRANS_API_HOST
+	 (URL (concat baidu-translate-api-host
 	  ;;百度API的URL格式在官方网站的文档中有详细介绍
 		     "?"
 		     (format "q=%s" query)
 		     "&"
 		     (format "salt=%s" salt)
 		     "&"
-		     (format "appid=%s" APPID)
+		     (format "appid=%s" baidu-translate-appid)
 		     "&"
-		     (format "sign=%s" (md5 (concat APPID query  salt SECURITY_KEY) nil nil (coding-system-from-name "utf-8")))
+		     (format "sign=%s" (md5 (concat baidu-translate-appid query  salt baidu-translate-security) nil nil (coding-system-from-name "utf-8")))
 		     "&"
 		     (format "from=%s" src-language)
 		     "&"
@@ -86,7 +86,8 @@ Argument BUFFER-OR-NAME"
   (if (buffer-live-p (get-buffer "*baidu-translate*"))
       (clear-buffer "*baidu-translate*"))
   (switch-to-buffer-other-window "*baidu-translate*")
-  (let ((result (baidu-translate-core string src-language dis-language)))
+  (let ((result (baidu-translate-core string src-language dis-language))
+	(GBKS nil))
     (while (string-match "\"dst\":\"" result)
       (setq GBKS (substring result
 			    (+ (string-match "\"dst\":\"" result) 7)
@@ -96,7 +97,7 @@ Argument BUFFER-OR-NAME"
       (insert (unicode-unescape GBKS))
       (insert "\n")
       (insert "\n"))
-    (beginning-of-buffer)))
+    (goto-char (point-min))))
 
 ;;对内核函数的包装UI，你可以根据需要修改语言类型参数，定制自己的UI，下面2个例子是将region或者buffer中的文字翻译为中文
 (defun baidu-translate-zh-mark (start end)
