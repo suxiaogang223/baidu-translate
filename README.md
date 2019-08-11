@@ -19,9 +19,9 @@ An emacs plugin using baidu-translate-api
 ```elisp
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
-(setq APPID "your APPID")
+(setq baidu-translate-appid "your APPID")
 ;;设置你的秘钥
-(setq SECURITY_KEY "your SECURITY")
+(setq baidu-translate-security "your SECURITY")
 ```
 
 ## 翻译为其他语言
