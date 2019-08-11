@@ -1,9 +1,9 @@
 ;;; baidu-translate.el --- An emacs plugin using baidu-translate-api  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2019  
+;; Copyright (C) 2019
 
 ;; Author:  <LiShizhen gsu4017@gmail.com>
-;; Keywords: 
+;; Keywords:
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 
 ;;; Commentary:
 
-;; 本插件需要 unicode-unescape插件的支持 
+;; 本插件需要 unicode-unescape插件的支持
 
 ;;; Code:
 
@@ -38,12 +38,13 @@
 
 
 (defun clear-buffer (buffer-or-name)
-  "Clear a buffer."
+  "Clear a buffer.
+Argument BUFFER-OR-NAME"
   (if (bufferp buffer-or-name)
       (setq buffer buffer-or-name)
     (setq buffer (get-buffer buffer-or-name)))
   (if (not (buffer-live-p buffer))
-      (error "buffer don't exist"))
+      (error "Buffer don't exist"))
   (save-excursion
 	;;清空buffer
 	(set-buffer buffer)
@@ -52,9 +53,9 @@
   
   
 (defun baidu-translate-core (query src-language dis-language)
-  "Translate query(STRING) from src-language(STRING) to dis-language(STRING),return as string.
-Example: (baidu-translate-core '你好' 'auto' 'en')
-Result: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u597d\",\"dst\":\"Hello\"}]}"
+  "Translate QUERY from SRC-LANGUAGE to DIS-LANGUAGE,return as string.
+\nExample: (baidu-translate-core '你好' 'auto' 'en')
+\nResult: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u597d\",\"dst\":\"Hello\"}]}"
   (let* ((salt (number-to-string (random)))
 	 (URL (concat TRANS_API_HOST
 	  ;;百度API的URL格式在官方网站的文档中有详细介绍
@@ -80,7 +81,7 @@ Result: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u59
 
 
 (defun baidu-translate-string (string src-language dis-language)
-  "Translate string from src-language to dis-language.Print the string to buffer *baidu-translate*."
+  "Translate STRING from SRC-LANGUAGE to DIS-LANGUAGE.Print the string to buffer *baidu-translate*."
   
   (if (buffer-live-p (get-buffer "*baidu-translate*"))
       (clear-buffer "*baidu-translate*"))
@@ -99,7 +100,9 @@ Result: {\"from\":\"zh\",\"to\":\"en\",\"trans_result\":[{\"src\":\"\\u4f60\\u59
 
 ;;对内核函数的包装UI，你可以根据需要修改语言类型参数，定制自己的UI，下面2个例子是将region或者buffer中的文字翻译为中文
 (defun baidu-translate-zh-mark (start end)
-  "Translate the marked text to Chinese."
+  "Translate the marked text to Chinese.
+Argument START .
+Argument END ."
   (interactive "r")
   (baidu-translate-string (buffer-substring start end) "auto" "zh"))
 
