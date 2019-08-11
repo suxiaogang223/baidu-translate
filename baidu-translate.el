@@ -1,9 +1,15 @@
-;;; baidu-translate.el --- An emacs plugin using baidu-translate-api  -*- lexical-binding: t; -*-
+;;; baidu-translate.el --- An plugin using baidu-translate-api
 
 ;; Copyright (C) 2019
 
 ;; Author:  <LiShizhen gsu4017@gmail.com>
-;; Keywords:
+;; Version: 1.0
+;; Package-Version: 2019.8.11
+;; URL: https://github.com/liShiZhensPi/baidu-translate
+
+;; This file is not part of GNU Emacs
+
+;; Keywords: docs
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -37,7 +43,7 @@
 (defvar baidu-translate-security)
 
 
-(defun clear-buffer (buffer-or-name)
+(defun baidu-translate-clear-buffer (buffer-or-name)
   "Clear the buffer (BUFFER-OR-NAME)"
   (let ((buffer nil))
     (if (bufferp buffer-or-name)
@@ -84,7 +90,7 @@
   "Translate STRING from SRC-LANGUAGE to DIS-LANGUAGE.Print the string to buffer *baidu-translate*."
   
   (if (buffer-live-p (get-buffer "*baidu-translate*"))
-      (clear-buffer "*baidu-translate*"))
+      (baidu-translate-clear-buffer "*baidu-translate*"))
   (switch-to-buffer-other-window "*baidu-translate*")
   (let ((result (baidu-translate-core string src-language dis-language))
 	(GBKS nil))
