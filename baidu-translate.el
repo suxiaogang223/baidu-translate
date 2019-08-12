@@ -4,7 +4,6 @@
 
 ;; Author:  <LiShizhen gsu4017@gmail.com>
 ;; Version: 1.0
-;; Package-Version: 2019.8.11
 ;; URL: https://github.com/liShiZhensPi/baidu-translate
 
 ;; This file is not part of GNU Emacs
@@ -35,7 +34,7 @@
 (provide 'baidu-translate)
 (require 'unicode-escape)
 
-(defconst baidu-translate-api-host "http://api.fanyi.baidu.com/api/trans/vip/translate")
+(defconst baidu-translate-api-host "https://api.fanyi.baidu.com/api/trans/vip/translate")
 ;;需要去百度申请API
 ;;设置你的百度翻译APPID
 (defvar baidu-translate-appid)
