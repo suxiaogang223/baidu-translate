@@ -44,7 +44,7 @@
 
 
 (defun baidu-translate-clear-buffer (buffer-or-name)
-  "Clear the buffer (BUFFER-OR-NAME)"
+  "Clear the buffer (BUFFER-OR-NAME)."
   (let ((buffer nil))
     (if (bufferp buffer-or-name)
 	(setq buffer buffer-or-name)
