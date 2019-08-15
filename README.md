@@ -40,3 +40,5 @@ An emacs plugin using baidu-translate-api
 ```
 ## 效果图
 ![Image text](https://github.com/liShiZhensPi/baidu-translate/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE.PNG)
+
+![Image text](./效果图.PNG)
