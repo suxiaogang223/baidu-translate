@@ -117,6 +117,20 @@ Argument END ."
   (interactive)
   (baidu-translate-string (buffer-string) "auto" "zh"))
 
+;;将region或者buffer中的文字翻译为英文
+(defun baidu-translate-en-mark (start end)
+  "Translate the marked text to English.
+Argument START .
+Argument END ."
+  (interactive "r")
+  (baidu-translate-string (buffer-substring start end) "auto" "en"))
+
+(defun baidu-translate-en-whole-buffer ()
+  "Translate the whole buffer to English."
+  (interactive)
+  (baidu-translate-string (buffer-string) "auto" "en"))
+
+
 ;; auto	自动检测
 ;; zh	中文
 ;; en	英语
