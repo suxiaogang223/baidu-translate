@@ -40,3 +40,6 @@ An emacs plugin using baidu-translate-api
 ```
 ## 效果图
 ![Preview](preview.jpg)
+
+
+This is a test
