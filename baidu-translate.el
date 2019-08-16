@@ -130,6 +130,7 @@ Argument END ."
   (interactive)
   (baidu-translate-string (buffer-string) "auto" "en"))
 
+
 ;; auto	自动检测
 ;; zh	中文
 ;; en	英语
