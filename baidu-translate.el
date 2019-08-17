@@ -1,4 +1,4 @@
-;;; baidu-translate.el --- An plugin using baidu-translate-api
+;;; baidu-translate.el --- A plugin using baidu-translate-api
 
 ;; Copyright (C) 2019
 
@@ -31,7 +31,6 @@
 
 
 
-(provide 'baidu-translate)
 (require 'unicode-escape)
 
 (defconst baidu-translate-api-host "https://api.fanyi.baidu.com/api/trans/vip/translate")
@@ -161,5 +160,7 @@ Argument END ."
 ;; cht	繁体中文
 ;; vie	越南语
 
+
+(provide 'baidu-translate)
 ;;; baidu-translate.el ends here
 
