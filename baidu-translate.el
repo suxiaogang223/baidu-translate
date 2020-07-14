@@ -5,6 +5,7 @@
 ;; Author:  <LiShizhen gsu4017@gmail.com>
 ;; Version: 1.0
 ;; URL: https://github.com/liShiZhensPi/baidu-translate
+;; Package-Requires: ((unicode-escape "1.1"))
 
 ;; This file is not part of GNU Emacs
 
